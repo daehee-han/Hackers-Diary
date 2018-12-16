@@ -7,20 +7,28 @@ import main from './pages/main';
 import detail from './pages/detail';
 import SideBar from './components/SideBar';
 import { Drawer, Icon } from 'react-native-elements';
+const SharedPreferences = require('react-native-shared-preferences');
 
 export default class App extends Component {
-    state = {
-        screens : {
-            'login' : login,
-            'register' : register,
-            'main': main,
-            'detail': detail,
-        },
-        screen: main,
-        login : true,
-        register : false,
-        loginScreen : login,
-        registerScreen : register
+
+    constructor(props) {
+        super(props);
+        SharedPreferences.getItem("isLogin", (value) => {
+            this.changeScreen('main');
+        })
+        this.state = {
+            screens : {
+                'login' : login,
+                'register' : register,
+                'main': main,
+                'detail': detail,
+            },
+            screen: main,
+            login : true,
+            register : false,
+            loginScreen : login,
+            registerScreen : register
+        }
     }
 
     changeScreen = (key) => {

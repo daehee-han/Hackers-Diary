@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
+const SharedPreferences = require('react-native-shared-preferences');
 
 export default class App extends Component {
+
+    login = () => {
+        SharedPreferences.setItem("isLogin", 'true')
+        this.props.change('main')
+    }
 
     render() {
         return (
@@ -56,6 +62,7 @@ export default class App extends Component {
                         <Button
                             large
                             backgroundColor="#192a56"
+                            onPress={this.login}
                             title='로그인 하기' />
                     </View>
                     <View style={{marginTop:10}}>
