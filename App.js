@@ -2,25 +2,39 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
 import login from './pages/login';
+import register from './pages/register';
 import main from './pages/main';
 import detail from './pages/detail';
 import SideBar from './components/SideBar';
 import { Drawer, Icon } from 'react-native-elements';
 
 export default class App extends Component {
-    screens = {
-        'login' : login,
-        'main': main,
-        'detail': detail,
-    }
     state = {
-        screen: this.screens['main'],
+        screens : {
+            'login' : login,
+            'register' : register,
+            'main': main,
+            'detail': detail,
+        },
+        screen: main,
         login : true,
-        loginScreen : login
+        register : false,
+        loginScreen : login,
+        registerScreen : register
     }
-    changeScreen(key) {
+
+    changeScreen = (key) => {
+        let login = false;
+        let register = false;
+        if(key === "login") {
+            login = true;
+        } else if(key === "register") {
+            register = true;
+        }
         this.setState({
-            screen: this.screens[key]
+            screen: this.state.screens[key],
+            login: login,
+            register: register
         })
     }
 
@@ -28,7 +42,13 @@ export default class App extends Component {
         if(this.state.login) {
             return (
                 <View style={styles.view}>
-                    <this.state.loginScreen/>
+                    <this.state.loginScreen change={this.changeScreen}/>
+                </View>
+            );    
+        } else if(this.state.register) {
+            return (
+                <View style={styles.view}>
+                    <this.state.registerScreen change={this.changeScreen}/>
                 </View>
             );    
         } else {
@@ -47,7 +67,7 @@ export default class App extends Component {
                     </View>
                     <View style={styles.contents}>
                         <ScrollView style={{ height: Dimensions.get('window').height - 104 }}>
-                            <this.state.screen></this.state.screen>
+                            <this.state.screen change={this.changeScreen}/>
                             <View style={styles.footer}>
                                 <View>
                                     <Text style={{ color: '#ffffff' }}>Copyright (c) Hacker's Diary & Blogger</Text>
