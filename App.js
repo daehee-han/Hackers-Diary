@@ -1,8 +1,10 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
-import main from './pages/main'
-import detail from './pages/detail'
+import main from './pages/main';
+import detail from './pages/detail';
+import SideBar from './components/SideBar';
+import { Drawer, Icon } from 'react-native-elements';
 
 export default class App extends Component {
     screens = {
@@ -19,24 +21,34 @@ export default class App extends Component {
     }
 
     render() {
+        closeDrawer = () => {
+            this.drawer._root.close()
+        };
+        openDrawer = () => {
+            this.drawer._root.open()
+        };
         return (
             <View style={styles.view}>
                 <View style={styles.topMenu}>
-                    <View style={styles.topButton}></View>
+                    <View style={styles.topButton}>
+                        <Icon name="menu" color="white"/>
+                    </View>
                     <View style={styles.logo}>
                         <Text style={styles.logoText}>Hacker's Diary</Text>
                     </View>
-                    <View style={styles.topButton}></View>
+                    <View style={styles.topButton}>
+                        <Icon name="search" color="white"/>
+                    </View>
                 </View>
                 <View style={styles.contents}>
-                    <ScrollView style={{height:Dimensions.get('window').height-104}}>
+                    <ScrollView style={{ height: Dimensions.get('window').height - 104 }}>
                         <this.state.screen></this.state.screen>
                         <View style={styles.footer}>
                             <View>
-                                <Text style={{color : '#ffffff'}}>Copyright (c) Hacker's Diary & Blogger</Text>
+                                <Text style={{ color: '#ffffff' }}>Copyright (c) Hacker's Diary & Blogger</Text>
                             </View>
                             <View>
-                                <Text style={{color : '#ffffff'}}>Thanks to kjkwak12@gmail.com</Text>
+                                <Text style={{ color: '#ffffff' }}>Thanks to kjkwak12@gmail.com</Text>
                             </View>
                         </View>
                     </ScrollView>
@@ -57,16 +69,14 @@ const styles = StyleSheet.create({
         backgroundColor : '#3498d8'
     },
     topButton : {
-        width : 40,
-        height : 40,
         backgroundColor : '#2980b9',
-        padding : 5
+        padding : 10
     },
     contents : {
         padding : 10,
     },
     logo : {
-        marginTop : 2
+        marginTop : 10
     },
     logoText : {
         fontSize : 20,
