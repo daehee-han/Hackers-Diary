@@ -49,6 +49,7 @@ export default class App extends Component {
                         <TextInput
                             placeholder="Password"
                             style={styles.textInput}
+                            secureTextEntry
                         />
                     </View>
                     <View style={{marginTop:20}}>
@@ -59,9 +60,10 @@ export default class App extends Component {
                     </View>
                     <View style={{marginTop:10}}>
                         <Button
-                                large
-                                backgroundColor="#273c75"
-                                title='계정 만들기' />
+                            large
+                            backgroundColor="#273c75"
+                            onPress={() => {this.props.change('register')}}
+                            title='계정 만들기' />
                     </View>
                 </View>
                 
