@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
+import login from './pages/login';
 import main from './pages/main';
 import detail from './pages/detail';
 import SideBar from './components/SideBar';
@@ -8,11 +9,14 @@ import { Drawer, Icon } from 'react-native-elements';
 
 export default class App extends Component {
     screens = {
+        'login' : login,
         'main': main,
-        'detail': detail
+        'detail': detail,
     }
     state = {
         screen: this.screens['main'],
+        login : true,
+        loginScreen : login
     }
     changeScreen(key) {
         this.setState({
@@ -21,40 +25,42 @@ export default class App extends Component {
     }
 
     render() {
-        closeDrawer = () => {
-            this.drawer._root.close()
-        };
-        openDrawer = () => {
-            this.drawer._root.open()
-        };
-        return (
-            <View style={styles.view}>
-                <View style={styles.topMenu}>
-                    <View style={styles.topButton}>
-                        <Icon name="menu" color="white"/>
-                    </View>
-                    <View style={styles.logo}>
-                        <Text style={styles.logoText}>Hacker's Diary</Text>
-                    </View>
-                    <View style={styles.topButton}>
-                        <Icon name="search" color="white"/>
-                    </View>
+        if(this.state.login) {
+            return (
+                <View style={styles.view}>
+                    <this.state.loginScreen/>
                 </View>
-                <View style={styles.contents}>
-                    <ScrollView style={{ height: Dimensions.get('window').height - 104 }}>
-                        <this.state.screen></this.state.screen>
-                        <View style={styles.footer}>
-                            <View>
-                                <Text style={{ color: '#ffffff' }}>Copyright (c) Hacker's Diary & Blogger</Text>
-                            </View>
-                            <View>
-                                <Text style={{ color: '#ffffff' }}>Thanks to kjkwak12@gmail.com</Text>
-                            </View>
+            );    
+        } else {
+            return (
+                <View style={styles.view}>
+                    <View style={styles.topMenu}>
+                        <View style={styles.topButton}>
+                            <Icon name="menu" color="white"/>
                         </View>
-                    </ScrollView>
+                        <View style={styles.logo}>
+                            <Text style={styles.logoText}>Hacker's Diary</Text>
+                        </View>
+                        <View style={styles.topButton}>
+                            <Icon name="search" color="white"/>
+                        </View>
+                    </View>
+                    <View style={styles.contents}>
+                        <ScrollView style={{ height: Dimensions.get('window').height - 104 }}>
+                            <this.state.screen></this.state.screen>
+                            <View style={styles.footer}>
+                                <View>
+                                    <Text style={{ color: '#ffffff' }}>Copyright (c) Hacker's Diary & Blogger</Text>
+                                </View>
+                                <View>
+                                    <Text style={{ color: '#ffffff' }}>Thanks to kjkwak12@gmail.com</Text>
+                                </View>
+                            </View>
+                        </ScrollView>
+                    </View>
                 </View>
-            </View>
-        );
+            );    
+        }
     }
 }
 
