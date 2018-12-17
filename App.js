@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Image, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Dimensions, Image, TouchableOpacity } from 'react-native';
 import { SearchBar, Icon, Text } from 'react-native-elements';
 const SharedPreferences = require('react-native-shared-preferences');
 import TabNavigator from 'react-native-tab-navigator';
@@ -90,43 +90,11 @@ export default class App extends Component {
             return (
                 <View style={styles.view}>
                     <View style={styles.topMenu}>
-                        <View style={styles.topButton}>
-                            <Image source={require('./images/logo.png')} style={{width:50,height:25,marginTop:5}} resizeMode="contain"/>
-                        </View>
-                        <View style={styles.logo}>
-                            <SearchBar
-                                onChangeText={() => { }}
-                                onClearText={() => { }}
-                                placeholder='검색'
-                                lightTheme
-                                containerStyle={{
-                                    backgroundColor: '#3498d8',
-                                    borderColor: '#3498d8',
-                                    borderTopWidth: 0,
-                                    borderBottomWidth: 0,
-                                    padding: 0,
-                                    marginTop : -15,
-                                    marginBottom : 0,
-                                    width: Dimensions.get('window').width - 110
-                                }}
-                                inputStyle={{
-                                    borderWidth: 0,
-                                    backgroundColor: '#3498d8',
-                                    color: '#fff',
-                                    borderBottomColor: "#24648B",
-                                    borderBottomWidth: 1,
-                                    marginLeft: 10,
-                                    marginRight: 5,
-                                    marginBottom : 0
-                                }}
-                                placeholderTextColor="#eee"
-                                icon={{ color: '#145D8B' }}
-                            />
-                        </View>
-                        <View style={styles.topButton}>
-                            <TouchableWithoutFeedback onPress={this.openModal}>
+                        <Image source={require('./images/logo2.png')} style={{height:20,marginTop:7,marginLeft:-40}} resizeMode="contain"/>
+                        <View style={[styles.topButton, {marginLeft:-40}]}>
+                            <TouchableOpacity onPress={this.openModal}>
                                 <Icon name="playlist-add-check" color="#fff" style={{padding:12}} size={30}/>
-                            </TouchableWithoutFeedback>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style={{marginTop:49}}>
@@ -173,9 +141,9 @@ export default class App extends Component {
                         this.state.isModal ? (
                             <View style={[styles.modal, {height:Dimensions.get('screen').height-53}]}>
                                 <View style={[styles.topMenu,{flexDirection: 'row', justifyContent: 'flex-start'}]}>
-                                    <TouchableWithoutFeedback onPress={() => { this.setState({isModal:false}) }}>
+                                    <TouchableOpacity onPress={() => { this.setState({isModal:false}) }}>
                                         <Icon name="arrow-back" color="#fff"/>
-                                    </TouchableWithoutFeedback>
+                                    </TouchableOpacity>
                                     <Text style={{marginLeft:10,fontSize:16,color:"#fff"}}>{this.state.data.title}</Text>
                                 </View>
                                 <this.state.modal change={this.changeScreen} data={this.state.data}/>
