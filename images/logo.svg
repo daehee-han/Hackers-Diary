@@ -26,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="250.88367"
-     inkscape:cy="516.38149"
+     inkscape:cx="14.002897"
+     inkscape:cy="758.8181"
      inkscape:document-units="mm"
-     inkscape:current-layer="g864"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="971"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -62,66 +62,76 @@
            height="75.761444"
            x="466.69049"
            y="263.89001" /></flowRegion><flowPara
-         id="flowPara844"></flowPara></flowRoot>    <g
-       id="g864"
-       transform="translate(-17.907058,24.054257)"
-       inkscape:export-xdpi="96"
+         id="flowPara844" /></flowRoot>    <g
+       style="fill:#000000"
        inkscape:export-ydpi="96"
-       style="fill:#000000">
+       inkscape:export-xdpi="96"
+       inkscape:export-filename="/home/jtjisgod/g1048.png"
+       transform="translate(-48.108515,-1.3363475)"
+       id="g1048">
       <g
-         id="g1048"
-         transform="translate(18.174328,-21.114292)"
-         inkscape:export-filename="/home/jtjisgod/g1048.png"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96">
-        <g
-           transform="translate(17.780616,-1.9760655)"
-           id="g926">
-          <path
-             inkscape:connector-curvature="0"
-             id="rect898"
-             transform="matrix(0.26458333,0,0,0.26458333,12.027128,-18.174327)"
-             d="m 179.30273,445.7168 a 33.840111,20.20305 0 0 0 -10.4414,1.01172 h -0.16602 v 0.0332 a 33.840111,20.20305 0 0 0 -23.0625,17.13867 h -0.16992 v 332.33984 40.65821 c 0,0 6.56455,-35.60727 31.81836,-39.90039 1.6888,-0.2871 2.98436,-0.53734 3.97852,-0.75782 H 188.69531 435.375 V 446.72852 H 189.80469 a 33.840111,20.20305 0 0 0 -10.50196,-1.01172 z"
-             style="fill:#0088aa;fill-opacity:1;stroke:none;stroke-width:18.89763832;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-          <path
-             id="path931-6"
-             d="m 58.172506,192.34142 a 7.7352574,9.7906985 0 0 0 -7.735257,9.79064 7.7352574,9.7906985 0 0 0 7.30784,9.76439 v 0.003 h 0.0412 a 7.7352574,9.7906985 0 0 0 0.386213,0.0246 7.7352574,9.7906985 0 0 0 0.547184,-0.0246 H 127.21683 V 192.36929 H 58.608716 a 7.7352574,9.7906985 0 0 0 -0.43621,-0.0278 z"
-             style="fill:#006680;fill-opacity:1;stroke:none;stroke-width:4.34143734;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-             inkscape:connector-curvature="0" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path931"
-             d="m 62.283973,196.00626 a 7.2760419,6.36451 0 0 0 -7.276041,6.36447 7.2760419,6.36451 0 0 0 6.873999,6.34741 v 0.002 h 0.03876 a 7.2760419,6.36451 0 0 0 0.363283,0.016 7.2760419,6.36451 0 0 0 0.5147,-0.016 H 127.22935 V 196.02438 H 62.694286 a 7.2760419,6.36451 0 0 0 -0.410313,-0.0181 z"
-             style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:3.39484048;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-        </g>
-        <text
-           id="text1027"
-           y="126.102"
-           x="109.19342"
-           style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-           xml:space="preserve"><tspan
-             id="tspan1029"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;line-height:0.25;font-family:Ani;-inkscape-font-specification:Ani;text-align:center;text-anchor:middle;fill:#e6e6e6;stroke-width:0.26458332"
-             y="126.102"
-             x="109.19342"
-             sodipodi:role="line">Hacker's</tspan><tspan
-             id="tspan1033"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;line-height:0.25;font-family:Ani;-inkscape-font-specification:Ani;text-align:center;text-anchor:middle;fill:#e6e6e6;stroke-width:0.26458332"
-             y="139.33116"
-             x="109.19342"
-             sodipodi:role="line">Diary</tspan></text>
-        <text
-           id="text1037"
-           y="179.96359"
-           x="92.400787"
-           style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-           xml:space="preserve"><tspan
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:Sarai;-inkscape-font-specification:Sarai;fill:#ffffff;stroke-width:0.26458332"
-             y="179.96359"
-             x="92.400787"
-             id="tspan1035"
-             sodipodi:role="line">SINCE 2018.</tspan></text>
+         id="g926"
+         transform="translate(17.780616,-1.9760655)">
+        <path
+           style="fill:#0088aa;fill-opacity:1;stroke:none;stroke-width:18.89763832;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 179.30273,445.7168 a 33.840111,20.20305 0 0 0 -10.4414,1.01172 h -0.16602 v 0.0332 a 33.840111,20.20305 0 0 0 -23.0625,17.13867 h -0.16992 v 332.33984 40.65821 c 0,0 6.56455,-35.60727 31.81836,-39.90039 1.6888,-0.2871 2.98436,-0.53734 3.97852,-0.75782 H 188.69531 435.375 V 446.72852 H 189.80469 a 33.840111,20.20305 0 0 0 -10.50196,-1.01172 z"
+           transform="matrix(0.26458333,0,0,0.26458333,12.027128,-18.174327)"
+           id="rect898"
+           inkscape:connector-curvature="0" />
+        <path
+           inkscape:connector-curvature="0"
+           style="fill:#006680;fill-opacity:1;stroke:none;stroke-width:4.34143734;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 58.172506,192.34142 a 7.7352574,9.7906985 0 0 0 -7.735257,9.79064 7.7352574,9.7906985 0 0 0 7.30784,9.76439 v 0.003 h 0.0412 a 7.7352574,9.7906985 0 0 0 0.386213,0.0246 7.7352574,9.7906985 0 0 0 0.547184,-0.0246 H 127.21683 V 192.36929 H 58.608716 a 7.7352574,9.7906985 0 0 0 -0.43621,-0.0278 z"
+           id="path931-6" />
+        <path
+           style="fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:3.39484048;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 62.283973,196.00626 a 7.2760419,6.36451 0 0 0 -7.276041,6.36447 7.2760419,6.36451 0 0 0 6.873999,6.34741 v 0.002 h 0.03876 a 7.2760419,6.36451 0 0 0 0.363283,0.016 7.2760419,6.36451 0 0 0 0.5147,-0.016 H 127.22935 V 196.02438 H 62.694286 a 7.2760419,6.36451 0 0 0 -0.410313,-0.0181 z"
+           id="path931"
+           inkscape:connector-curvature="0" />
       </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="109.19342"
+         y="126.102"
+         id="text1027"><tspan
+           sodipodi:role="line"
+           x="109.19342"
+           y="126.102"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;line-height:0.25;font-family:Ani;-inkscape-font-specification:Ani;text-align:center;text-anchor:middle;fill:#e6e6e6;stroke-width:0.26458332"
+           id="tspan1029">Hacker's</tspan><tspan
+           sodipodi:role="line"
+           x="109.19342"
+           y="139.33116"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;line-height:0.25;font-family:Ani;-inkscape-font-specification:Ani;text-align:center;text-anchor:middle;fill:#e6e6e6;stroke-width:0.26458332"
+           id="tspan1033">Diary</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="92.400787"
+         y="179.96359"
+         id="text1037"><tspan
+           sodipodi:role="line"
+           id="tspan1035"
+           x="92.400787"
+           y="179.96359"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:Sarai;-inkscape-font-specification:Sarai;fill:#ffffff;stroke-width:0.26458332">SINCE 2018.</tspan></text>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="59.671379"
+       y="55.542336"
+       id="text1027-3"><tspan
+         sodipodi:role="line"
+         x="59.671379"
+         y="55.542336"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;line-height:0.25;font-family:Ani;-inkscape-font-specification:Ani;text-align:center;text-anchor:middle;fill:#e6e6e6;stroke-width:0.26458332"
+         id="tspan1029-6">Hacker's</tspan><tspan
+         sodipodi:role="line"
+         x="59.671379"
+         y="68.771507"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;line-height:0.25;font-family:Ani;-inkscape-font-specification:Ani;text-align:center;text-anchor:middle;fill:#e6e6e6;stroke-width:0.26458332"
+         id="tspan1033-7">Diary</tspan></text>
   </g>
 </svg>

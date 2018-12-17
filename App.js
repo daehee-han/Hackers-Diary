@@ -74,7 +74,7 @@ export default class App extends Component {
                 <View style={styles.view}>
                     <View style={styles.topMenu}>
                         <View style={styles.topButton}>
-                            <Image source={require('./images/logo.png')} style={{width:32,height:32}} resizeMode="contain"/>
+                            <Image source={require('./images/logo.png')} style={{width:50,height:25,marginTop:5}} resizeMode="contain"/>
                         </View>
                         <View style={styles.logo}>
                             <SearchBar
@@ -90,7 +90,7 @@ export default class App extends Component {
                                     padding: 0,
                                     marginTop : -15,
                                     marginBottom : 0,
-                                    width: Dimensions.get('window').width - 90
+                                    width: Dimensions.get('window').width - 110
                                 }}
                                 inputStyle={{
                                     borderWidth: 0,
@@ -98,8 +98,8 @@ export default class App extends Component {
                                     color: '#fff',
                                     borderBottomColor: "#24648B",
                                     borderBottomWidth: 1,
-                                    marginLeft: 10,
-                                    marginRight: 10,
+                                    marginLeft: 5,
+                                    marginRight: 5,
                                     marginBottom : 0
                                 }}
                                 placeholderTextColor="#eee"
@@ -107,7 +107,7 @@ export default class App extends Component {
                             />
                         </View>
                         <View style={styles.topButton}>
-                            <Image source={require('./images/logo.png')} style={{width:32,height:32}} resizeMode="contain"/>
+                            <Icon name="playlist-add-check" color="#fff" style={{padding:12}} size={30}/>
                         </View>
                     </View>
                     <View style={{marginTop:49}}>
