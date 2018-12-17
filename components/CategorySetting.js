@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Dimensions, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { Text } from 'react-native-elements';
 import Modal from "react-native-modal";
 
 export default class App extends Component {
     state = {
         isModalVisible : false,
-        selected: "Web hacking - XSS"
+        selected: "Web hacking - XSS",
+        text : ""
     }
     render() {
         const Categories = []
@@ -27,7 +28,17 @@ export default class App extends Component {
                 <View style={{padding : 20, marginBottom: 20}}>
                     <Text h4>카테고리 설정</Text>
                     <Text>카테고리를 추가하거나 삭제합니다.</Text>
-                    <View>
+                    <View style={{borderWidth:1, borderColor:"#eee", padding:10, marginTop:10,}}>
+                        <Text style={{fontSize:10, fontWeight:"bold"}}>카테고리 명</Text>
+                        <TextInput
+                            placeholder="카테고리 명"
+                            style={{ height: 40, borderColor: 'gray', borderBottomWidth: 1, padding: 5, borderBottomColor: "#aaa" }}
+                            onChangeText={(text) => this.setState({ text })}
+                            value={this.state.text}
+                        />
+                        <View style={styles.button} onPress={() => { this.setState({ isModalVisible: false }) }}>
+                            <Text style={{ alignSelf: "center" }}>카테고리 생성</Text>
+                        </View>
                     </View>
                     <View style={{marginTop:10, borderColor: "#eee", borderWidth: 1}}>
                         {Categories}
