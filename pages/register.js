@@ -3,7 +3,19 @@ import { StyleSheet, View, Image, TextInput, Text, ScrollView } from 'react-nati
 import { Button } from 'react-native-elements';
 
 export default class App extends Component {
+    state = {
+        username : "",
+        email : "",
+        password : "",
+        password2 : ""
+    }
+    login = () => {
+        if(this.state.password !== this.state.password2) {
+            alert("비밀번호와 확인용 비밀번호가 서로 같지 않습니다.");
+            return;
+        }
 
+    }
     render() {
         return (
             <ScrollView>
@@ -34,6 +46,7 @@ export default class App extends Component {
                         <TextInput
                             placeholder="Email"
                             style={styles.textInput}
+                            onChangeText={(value) => {this.setState({email: value})}}
                         />
                     </View>
                     <View style={styles.obj}>
@@ -41,6 +54,7 @@ export default class App extends Component {
                         <TextInput
                             placeholder="Username"
                             style={styles.textInput}
+                            onChangeText={(value) => {this.setState({username: value})}}
                         />
                     </View>
                     <View style={styles.obj}>
@@ -48,6 +62,7 @@ export default class App extends Component {
                         <TextInput
                             placeholder="Password"
                             style={styles.textInput}
+                            onChangeText={(value) => {this.setState({password: value})}}
                             secureTextEntry
                         />
                     </View>
@@ -56,6 +71,7 @@ export default class App extends Component {
                         <TextInput
                             placeholder="Password Check"
                             style={styles.textInput}
+                            onChangeText={(value) => {this.setState({password2: value})}}
                             secureTextEntry
                         />
                     </View>
@@ -63,6 +79,7 @@ export default class App extends Component {
                         <Button
                             large
                             backgroundColor="#192a56"
+                            onPress={this.login}
                             title='계정 만들기' />
                     </View>
                     <View style={{marginTop:10}}>
