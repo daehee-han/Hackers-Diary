@@ -1,6 +1,9 @@
-
 import React, { Component } from 'react';
-import { StyleSheet, Button,Text, View, Dimensions, ScrollView, Image, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Dimensions, Image, TouchableWithoutFeedback } from 'react-native';
+import { SearchBar, Icon, Text } from 'react-native-elements';
+const SharedPreferences = require('react-native-shared-preferences');
+import TabNavigator from 'react-native-tab-navigator';
+import Modal from "react-native-modal";
 
 import Login from './pages/login';
 import Register from './pages/register';
@@ -11,9 +14,7 @@ import Like from './pages/like';
 import Setting from './pages/setting';
 import Follow from './pages/follow';
 
-import { SearchBar, Icon } from 'react-native-elements';
-const SharedPreferences = require('react-native-shared-preferences');
-import TabNavigator from 'react-native-tab-navigator';
+import CategorySetting from './components/CategorySetting';
 
 export default class App extends Component {
 
@@ -36,20 +37,22 @@ export default class App extends Component {
             screen: Login,
             hide: true,
             selectedTab : "timeline",
-            isModal : false
+            isModal : false,
+            modal : CategorySetting
         }
     }
 
     changeScreen = (key, data="") => {
         let hide = false;
         let isModal = false;
-        if(key === "login") {
+        if(key === "login" || key === "register") {
             hide = true;
-        } else if(key === "register") {
-            register = true;
         }
-        if(key === "detail") {
+        if(key === "detail" || key === "category") {
             isModal = true;
+            this.setState({
+                modal: this.state.screens[key]
+            })
             key = this.state.selectedTab;
         }
         this.setState({
@@ -57,7 +60,20 @@ export default class App extends Component {
             selectedTab : key,
             hide: hide,
             data: data,
-            isModal: isModal
+            isModal: isModal,
+        })
+    }
+
+    openModal = () => {
+        this.changeScreen("category", {title:"카테고리 설정"})
+        this.setState({
+            isModal: true,
+        })
+    }
+
+    closeModal = () => {
+        this.setState({
+            isModal: false,
         })
     }
 
@@ -98,7 +114,7 @@ export default class App extends Component {
                                     color: '#fff',
                                     borderBottomColor: "#24648B",
                                     borderBottomWidth: 1,
-                                    marginLeft: 5,
+                                    marginLeft: 10,
                                     marginRight: 5,
                                     marginBottom : 0
                                 }}
@@ -107,7 +123,9 @@ export default class App extends Component {
                             />
                         </View>
                         <View style={styles.topButton}>
-                            <Icon name="playlist-add-check" color="#fff" style={{padding:12}} size={30}/>
+                            <TouchableWithoutFeedback onPress={this.openModal}>
+                                <Icon name="playlist-add-check" color="#fff" style={{padding:12}} size={30}/>
+                            </TouchableWithoutFeedback>
                         </View>
                     </View>
                     <View style={{marginTop:49}}>
@@ -157,9 +175,9 @@ export default class App extends Component {
                                     <TouchableWithoutFeedback onPress={() => { this.setState({isModal:false}) }}>
                                         <Icon name="arrow-back" color="#fff"/>
                                     </TouchableWithoutFeedback>
-                                    <Text style={{marginLeft:10,fontSize:16,color:"#fff"}}>"울지않는 벌새" 블로그</Text>
+                                    <Text style={{marginLeft:10,fontSize:16,color:"#fff"}}>{this.state.data.title}</Text>
                                 </View>
-                                <Detail change={this.changeScreen} data={this.state.data}/>
+                                <this.state.modal change={this.changeScreen} data={this.state.data}/>
                             </View>
                         ) : (
                             <View>

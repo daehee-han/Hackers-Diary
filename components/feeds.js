@@ -39,7 +39,7 @@ export default class App extends Component {
         this.state.feeds.forEach(feed => {
             feeds.push((
                 <TouchableWithoutFeedback
-                    onPress={() => { this.props.change('detail', { id: feed._id }) }}
+                    onPress={() => { this.props.change('detail', { id: feed._id, title: '"울지않는 벌새" 블로그' }) }}
                 >
                     <View style={styles.card}>
                         <Text style={styles.title}>{feed.title}</Text>
