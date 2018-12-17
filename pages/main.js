@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Button } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 import Axios from 'axios';
 const parseString = require('react-native-xml2js').parseString;
 
@@ -20,6 +20,7 @@ export default class App extends Component {
                 items = result.rss.channel[0].item;
                 items.forEach(item => {
                     feeds.push({
+                        _id: "IDIDIDID",
                         title: item.title,
                         link: item.link,
                         description: item.description[0].replace(/<br\s*\/>/ig, " ").replace(/(<([^>]+)>)/ig,"").replace(/&nbsp;/ig, " ").slice(0, 200) + " ...",
@@ -40,17 +41,21 @@ export default class App extends Component {
 
         this.state.feeds.forEach(feed => {
             feeds.push((
-                <View style={styles.card}>
-                    <Text style={styles.title}>{feed.title}</Text>
-                    <Text style={[styles.url, styles.introText]}>{feed.link}</Text>
-                    <Text>
-                        {feed.description}
-                    </Text>
-                    <View style={styles.cardIntro}>
-                        <Text style={[styles.author, styles.introText]}>{feed.author} > {feed.category}</Text>
-                        <Text style={[styles.pubDate, styles.introText]}>{feed.pubDate}</Text>
+                <TouchableWithoutFeedback
+                    onPress={() => { this.props.change('detail', { id: feed._id }) }}
+                >
+                    <View style={styles.card}>
+                        <Text style={styles.title}>{feed.title}</Text>
+                        <Text style={[styles.url, styles.introText]}>{feed.link}</Text>
+                        <Text>
+                            {feed.description}
+                        </Text>
+                        <View style={styles.cardIntro}>
+                            <Text style={[styles.author, styles.introText]}>{feed.author} > {feed.category}</Text>
+                            <Text style={[styles.pubDate, styles.introText]}>{feed.pubDate}</Text>
+                        </View>
                     </View>
-                </View>
+                </TouchableWithoutFeedback>
             ));
         });
 

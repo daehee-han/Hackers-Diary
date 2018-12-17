@@ -1,10 +1,11 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, Button,Text, View, Dimensions, ScrollView, Image } from 'react-native';
+import { StyleSheet, Button,Text, View, Dimensions, ScrollView, Image, TouchableWithoutFeedback } from 'react-native';
 
 import Login from './pages/login';
 import Register from './pages/register';
 import Main from './pages/main';
+import Detail from './pages/detail';
 import Category from './pages/category';
 import Like from './pages/like';
 import Setting from './pages/setting';
@@ -29,25 +30,34 @@ export default class App extends Component {
                 'category' : Category,
                 'like' : Like,
                 'follow' : Follow,
-                'setting' : Setting
+                'setting' : Setting,
+                'detail' : Detail
             },
             screen: Login,
             hide: true,
-            selectedTab : "timeline"
+            selectedTab : "timeline",
+            isModal : false
         }
     }
 
-    changeScreen = (key) => {
+    changeScreen = (key, data="") => {
         let hide = false;
+        let isModal = false;
         if(key === "login") {
             hide = true;
         } else if(key === "register") {
             register = true;
         }
+        if(key === "detail") {
+            isModal = true;
+            key = this.state.selectedTab;
+        }
         this.setState({
             screen: this.state.screens[key],
             selectedTab : key,
-            hide: hide
+            hide: hide,
+            data: data,
+            isModal: isModal
         })
     }
 
@@ -55,7 +65,7 @@ export default class App extends Component {
         if(this.state.hide) {
             return (
                 <View style={styles.view}>
-                    <this.state.screen change={this.changeScreen}/>
+                    <this.state.screen change={this.changeScreen} data={this.state.data}/>
                 </View>
             );
         } else {
@@ -137,9 +147,25 @@ export default class App extends Component {
                     </View>
                     <View>
                         <View style={styles.innerContent}>
-                            <CurrentScreen change={this.changeScreen} />
+                            <CurrentScreen change={this.changeScreen} data={this.state.data}/>
                         </View>
                     </View>
+                    {
+                        this.state.isModal ? (
+                            <View style={styles.modal}>
+                                <View style={[styles.topMenu,{flexDirection: 'row', justifyContent: 'flex-start'}]}>
+                                    <TouchableWithoutFeedback onPress={() => { this.setState({isModal:false}) }}>
+                                        <Icon name="arrow-back" color="#fff"/>
+                                    </TouchableWithoutFeedback>
+                                    <Text style={{marginLeft:10,fontSize:16,color:"#fff"}}>"울지않는 벌새" 블로그</Text>
+                                </View>
+                                <Detail change={this.changeScreen} data={this.props.data}/>
+                            </View>
+                        ) : (
+                            <View>
+                            </View>
+                        )
+                    }
                 </View>
             );    
         }
@@ -147,6 +173,14 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+    modal : {
+        backgroundColor:"#fff",
+        width:Dimensions.get('screen').width,
+        height:Dimensions.get('screen').height,
+        position:'absolute',
+        top:0,
+        left:0
+    },
     view : {
         backgroundColor : '#f2f2f2',
     },
@@ -170,7 +204,7 @@ const styles = StyleSheet.create({
         backgroundColor : '#313131',
     },
     innerContent: {
-        height: Dimensions.get('screen').height - 49 * 2,
+        height: Dimensions.get('screen').height - 176,
         backgroundColor: "#eee"
     }
 });
