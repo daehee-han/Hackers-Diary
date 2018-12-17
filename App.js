@@ -1,11 +1,10 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Dimensions, ScrollView, Image } from 'react-native';
-import login from './pages/login';
-import register from './pages/register';
-import main from './pages/main';
-import detail from './pages/detail';
-import SideBar from './components/SideBar';
+import { StyleSheet, Button,Text, View, Dimensions, ScrollView, Image } from 'react-native';
+import Login from './pages/login';
+import Register from './pages/register';
+import Main from './pages/main';
+import Detail from './pages/detail';
 import { SearchBar, Icon } from 'react-native-elements';
 const SharedPreferences = require('react-native-shared-preferences');
 import TabNavigator from 'react-native-tab-navigator';
@@ -15,51 +14,46 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         SharedPreferences.getItem("isLogin", (value) => {
-            this.changeScreen('main');
+            this.changeScreen('timeline');
         })
         this.state = {
             screens : {
-                'login' : login,
-                'register' : register,
-                'main': main,
-                'detail': detail,
+                'login' : Login,
+                'register' : Register,
+                'timeline' : Main,
+                'detail': Detail,
+                'like' : Detail,
+                'category' : Detail,
+                'follow' : Detail,
+                'setting' : Detail
             },
-            screen: main,
-            login : true,
-            register : false,
-            loginScreen : login,
-            registerScreen : register
+            screen: Login,
+            hide: true,
+            selectedTab : "timeline"
         }
     }
 
     changeScreen = (key) => {
-        let login = false;
-        let register = false;
+        let hide = false;
         if(key === "login") {
-            login = true;
+            hide = true;
         } else if(key === "register") {
             register = true;
         }
         this.setState({
             screen: this.state.screens[key],
-            login: login,
-            register: register
+            selectedTab : key,
+            hide: hide
         })
     }
 
     render() {
-        if(this.state.login) {
+        if(this.state.hide) {
             return (
                 <View style={styles.view}>
-                    <this.state.loginScreen change={this.changeScreen}/>
+                    <this.state.screen change={this.changeScreen}/>
                 </View>
-            );    
-        } else if(this.state.register) {
-            return (
-                <View style={styles.view}>
-                    <this.state.registerScreen change={this.changeScreen}/>
-                </View>
-            );    
+            );
         } else {
             return (
                 <View style={styles.view}>
@@ -102,47 +96,44 @@ export default class App extends Component {
                         </View>
                     </View>
                     <View style={{marginTop:49}}>
-                        <TabNavigator >
+                        <TabNavigator>
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'timeline'}
                                 renderIcon={() => <Icon name="image" type="font-awesome" color="#999"/>}
                                 renderSelectedIcon={() => <Icon name="image" type="font-awesome" color="#3498d8"/>}
                                 badgeText="1"
                                 onPress={() => this.setState({ selectedTab: 'timeline' })}
-                            >
-                                <View style={styles.innerContent}>
-                                <this.state.screen change={this.changeScreen} />
-                                </View>
-                            </TabNavigator.Item>
+                            ><View/></TabNavigator.Item>
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'like'}
                                 renderIcon={() => <Icon name="heart" type="font-awesome" color="#999"/>}
                                 renderSelectedIcon={() => <Icon name="heart" type="font-awesome" color="#ff5959"/>}
-                                onPress={() => this.setState({ selectedTab: 'like' })}>
-                                <View><Text>BBB</Text></View>
-                            </TabNavigator.Item>
+                                onPress={() => this.setState({ selectedTab: 'like' })}
+                            ><View/></TabNavigator.Item>
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'category'}
                                 renderIcon={() => <Icon name="table-large" type="material-community" color="#999"/>}
                                 renderSelectedIcon={() => <Icon name="table-large" type="material-community" color="#3498d8"/>}
-                                onPress={() => this.setState({ selectedTab: 'category' })}>
-                                <View><Text>CCC</Text></View>
-                            </TabNavigator.Item>
+                                onPress={() => this.setState({ selectedTab: 'category' })}
+                            ><View/></TabNavigator.Item>
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'follow'}
                                 renderIcon={() => <Icon name="person" color="#999"/>}
                                 renderSelectedIcon={() => <Icon name="person" color="#3498d8"/>}
-                                onPress={() => this.setState({ selectedTab: 'follow' })}>
-                                <View><Text>Follow</Text></View>
-                            </TabNavigator.Item>
+                                onPress={() => this.setState({ selectedTab: 'follow' })}
+                            ><View/></TabNavigator.Item>
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'setting'}
                                 renderIcon={() => <Icon name="settings" color="#999"/>}
                                 renderSelectedIcon={() => <Icon name="settings" color="#3498d8"/>}
-                                onPress={() => this.setState({ selectedTab: 'setting' })}>
-                                <View><Text>DDD</Text></View>
-                            </TabNavigator.Item>
+                                onPress={() => this.setState({ selectedTab: 'setting' })}
+                            ><View/></TabNavigator.Item>
                         </TabNavigator>
+                    </View>
+                    <View>
+                        <View style={styles.innerContent}>
+                            <this.state.screen change={this.changeScreen} />
+                        </View>
                     </View>
                 </View>
             );    
