@@ -159,7 +159,7 @@ export default class App extends Component {
                                     </TouchableWithoutFeedback>
                                     <Text style={{marginLeft:10,fontSize:16,color:"#fff"}}>"울지않는 벌새" 블로그</Text>
                                 </View>
-                                <Detail change={this.changeScreen} data={this.props.data}/>
+                                <Detail change={this.changeScreen} data={this.state.data}/>
                             </View>
                         ) : (
                             <View>

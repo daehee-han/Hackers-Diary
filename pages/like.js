@@ -1,13 +1,21 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import React, { Component } from 'react';
+import { ScrollView, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
+import Feeds from '../components/feeds';
+import Axios from 'axios';
 
 export default class App extends Component {
-  render() {
-    return (
-      <Text>Like Page</Text>
-    );
-  }
+    constructor(props) {
+        super(props);
+    }
+    getFeeds = (callback) => {
+        Axios.get("http://mungsul.tistory.com/rss")
+        .then(res => {
+            callback(res);
+        });
+    }
+    render() {
+        return (
+            <Feeds getFeeds={this.getFeeds} change={this.props.change} data={this.props.data}/>
+        );
+    }
 }
-
-const styles = StyleSheet.create({
-});
