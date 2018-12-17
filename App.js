@@ -1,12 +1,12 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ScrollView, Image } from 'react-native';
 import login from './pages/login';
 import register from './pages/register';
 import main from './pages/main';
 import detail from './pages/detail';
 import SideBar from './components/SideBar';
-import { Drawer, Icon } from 'react-native-elements';
+import { SearchBar, Icon } from 'react-native-elements';
 const SharedPreferences = require('react-native-shared-preferences');
 
 export default class App extends Component {
@@ -64,13 +64,40 @@ export default class App extends Component {
                 <View style={styles.view}>
                     <View style={styles.topMenu}>
                         <View style={styles.topButton}>
-                            <Icon name="menu" color="white"/>
+                            <Image source={require('./images/logo.png')} style={{width:32,height:32}} resizeMode="contain"/>
                         </View>
                         <View style={styles.logo}>
-                            <Text style={styles.logoText}>Hacker's Diary</Text>
+                            <SearchBar
+                                onChangeText={() => { }}
+                                onClearText={() => { }}
+                                placeholder='검색'
+                                lightTheme
+                                containerStyle={{
+                                    backgroundColor: '#3498d8',
+                                    borderColor: '#3498d8',
+                                    borderTopWidth: 0,
+                                    borderBottomWidth: 0,
+                                    padding: 0,
+                                    marginTop : -15,
+                                    marginBottom : 0,
+                                    width: Dimensions.get('window').width - 90
+                                }}
+                                inputStyle={{
+                                    borderWidth: 0,
+                                    backgroundColor: '#3498d8',
+                                    color: '#fff',
+                                    borderBottomColor: "#24648B",
+                                    borderBottomWidth: 1,
+                                    marginLeft: 10,
+                                    marginRight: 10,
+                                    marginBottom : 0
+                                }}
+                                placeholderTextColor="#eee"
+                                icon={{ color: '#145D8B' }}
+                            />
                         </View>
                         <View style={styles.topButton}>
-                            <Icon name="search" color="white"/>
+                            <Image source={require('./images/logo.png')} style={{width:32,height:32}} resizeMode="contain"/>
                         </View>
                     </View>
                     <View style={styles.contents}>
@@ -102,15 +129,8 @@ const styles = StyleSheet.create({
         padding : 10,
         backgroundColor : '#3498d8'
     },
-    topButton : {
-        backgroundColor : '#2980b9',
-        padding : 10
-    },
     contents : {
         padding : 10,
-    },
-    logo : {
-        marginTop : 10
     },
     logoText : {
         fontSize : 20,
