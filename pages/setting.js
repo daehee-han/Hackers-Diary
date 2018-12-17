@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, Button } from 'react-native';
+const SharedPreferences = require('react-native-shared-preferences');
 
 export default class App extends Component {
     logout = () => {
-        alert("Logout");
+        SharedPreferences.setItem("isLogin", 'false')
+        SharedPreferences.setItem("token", '')
+        this.props.change("login");
     }
     render() {
         return (

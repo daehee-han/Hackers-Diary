@@ -7,7 +7,8 @@ export default class App extends Component {
 
     login = () => {
         SharedPreferences.setItem("isLogin", 'true')
-        this.props.change('main')
+        SharedPreferences.setItem("token", '')
+        this.props.change('timeline')
     }
 
     render() {

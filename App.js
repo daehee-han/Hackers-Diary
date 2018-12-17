@@ -21,7 +21,9 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         SharedPreferences.getItem("isLogin", (value) => {
-            this.changeScreen('timeline');
+            if(value === "true") {
+                this.changeScreen('timeline');
+            }
         })
         this.state = {
             screens : {
