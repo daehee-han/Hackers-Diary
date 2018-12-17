@@ -152,7 +152,7 @@ export default class App extends Component {
                     </View>
                     {
                         this.state.isModal ? (
-                            <View style={styles.modal}>
+                            <View style={[styles.modal, {height:Dimensions.get('screen').height-64.7}]}>
                                 <View style={[styles.topMenu,{flexDirection: 'row', justifyContent: 'flex-start'}]}>
                                     <TouchableWithoutFeedback onPress={() => { this.setState({isModal:false}) }}>
                                         <Icon name="arrow-back" color="#fff"/>
@@ -176,10 +176,10 @@ const styles = StyleSheet.create({
     modal : {
         backgroundColor:"#fff",
         width:Dimensions.get('screen').width,
-        height:Dimensions.get('screen').height,
         position:'absolute',
         top:0,
-        left:0
+        left:0,
+        paddingBottom:20
     },
     view : {
         backgroundColor : '#f2f2f2',
