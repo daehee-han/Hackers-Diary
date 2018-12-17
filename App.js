@@ -8,6 +8,7 @@ import detail from './pages/detail';
 import SideBar from './components/SideBar';
 import { SearchBar, Icon } from 'react-native-elements';
 const SharedPreferences = require('react-native-shared-preferences');
+import TabNavigator from 'react-native-tab-navigator';
 
 export default class App extends Component {
 
@@ -100,18 +101,45 @@ export default class App extends Component {
                             <Image source={require('./images/logo.png')} style={{width:32,height:32}} resizeMode="contain"/>
                         </View>
                     </View>
-                    <View style={styles.contents}>
-                        <ScrollView style={{ height: Dimensions.get('window').height - 104 }}>
-                            <this.state.screen change={this.changeScreen}/>
-                            <View style={styles.footer}>
-                                <View>
-                                    <Text style={{ color: '#ffffff' }}>Copyright (c) Hacker's Diary & Blogger</Text>
-                                </View>
-                                <View>
-                                    <Text style={{ color: '#ffffff' }}>Thanks to kjkwak12@gmail.com</Text>
-                                </View>
-                            </View>
-                        </ScrollView>
+                    <View style={{marginTop:49}}>
+                        <TabNavigator>
+                            <TabNavigator.Item
+                                selected={this.state.selectedTab === 'timeline'}
+                                renderIcon={() => <Icon name="image" type="font-awesome" color="#999"/>}
+                                badgeText="1"
+                                onPress={() => this.setState({ selectedTab: 'timeline' })}
+                            >
+                                <View style={styles.contents}>
+                                    <ScrollView style={{ height: Dimensions.get('window').height - 104 }}>
+                                        <this.state.screen change={this.changeScreen} />
+                                    </ScrollView>
+                                </View>    
+                            </TabNavigator.Item>
+                            <TabNavigator.Item
+                                selected={this.state.selectedTab === 'like'}
+                                renderIcon={() => <Icon name="heart" type="font-awesome" color="#999"/>}
+                                onPress={() => this.setState({ selectedTab: 'like' })}>
+                                <View><Text>BBB</Text></View>
+                            </TabNavigator.Item>
+                            <TabNavigator.Item
+                                selected={this.state.selectedTab === 'category'}
+                                renderIcon={() => <Icon name="table-large" type="material-community" color="#999"/>}
+                                onPress={() => this.setState({ selectedTab: 'category' })}>
+                                <View><Text>CCC</Text></View>
+                            </TabNavigator.Item>
+                            <TabNavigator.Item
+                                selected={this.state.selectedTab === 'follow'}
+                                renderIcon={() => <Icon name="person" color="#999"/>}
+                                onPress={() => this.setState({ selectedTab: 'follow' })}>
+                                <View><Text>Follow</Text></View>
+                            </TabNavigator.Item>
+                            <TabNavigator.Item
+                                selected={this.state.selectedTab === 'setting'}
+                                renderIcon={() => <Icon name="settings" color="#999"/>}
+                                onPress={() => this.setState({ selectedTab: 'setting' })}>
+                                <View><Text>DDD</Text></View>
+                            </TabNavigator.Item>
+                        </TabNavigator>
                     </View>
                 </View>
             );    
