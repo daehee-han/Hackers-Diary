@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Dimensions } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Axios from 'axios';
 const parseString = require('react-native-xml2js').parseString;
 
@@ -55,12 +55,28 @@ export default class App extends Component {
         });
 
         return (
-            <React.Fragment>
-                <Text style={styles.h1}># Recent Feeds</Text>
-                <View style={styles.body}>
-                    {feeds}
+            <View>
+                <View>
+                    <Text>SD</Text>
                 </View>
-            </React.Fragment>
+                <View>
+                    <Text>ASDASD</Text>
+                </View>
+                <View>
+                    <Text>SdqwdqwdwqdD</Text>
+                </View>
+                <View>
+                    <Text>SDwqdqwd</Text>
+                </View>
+                {/* <ScrollView horizontal={true} style={{ flexGrow: 1 }} contentContainerStyle={{ flex: 1 }}>
+                    <View style={{flex:1}}>
+                        <Text style={styles.h1}># Recent Feeds</Text>
+                        <View style={styles.body}>
+                            {feeds}
+                        </View>
+                    </View>
+                </ScrollView> */}
+            </View>
         );
     }
 }

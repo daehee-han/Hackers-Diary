@@ -102,40 +102,43 @@ export default class App extends Component {
                         </View>
                     </View>
                     <View style={{marginTop:49}}>
-                        <TabNavigator>
+                        <TabNavigator >
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'timeline'}
                                 renderIcon={() => <Icon name="image" type="font-awesome" color="#999"/>}
+                                renderSelectedIcon={() => <Icon name="image" type="font-awesome" color="#3498d8"/>}
                                 badgeText="1"
                                 onPress={() => this.setState({ selectedTab: 'timeline' })}
                             >
-                                <View style={styles.contents}>
-                                    <ScrollView style={{ height: Dimensions.get('window').height - 104 }}>
-                                        <this.state.screen change={this.changeScreen} />
-                                    </ScrollView>
-                                </View>    
+                                <View style={styles.innerContent}>
+                                <this.state.screen change={this.changeScreen} />
+                                </View>
                             </TabNavigator.Item>
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'like'}
                                 renderIcon={() => <Icon name="heart" type="font-awesome" color="#999"/>}
+                                renderSelectedIcon={() => <Icon name="heart" type="font-awesome" color="#ff5959"/>}
                                 onPress={() => this.setState({ selectedTab: 'like' })}>
                                 <View><Text>BBB</Text></View>
                             </TabNavigator.Item>
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'category'}
                                 renderIcon={() => <Icon name="table-large" type="material-community" color="#999"/>}
+                                renderSelectedIcon={() => <Icon name="table-large" type="material-community" color="#3498d8"/>}
                                 onPress={() => this.setState({ selectedTab: 'category' })}>
                                 <View><Text>CCC</Text></View>
                             </TabNavigator.Item>
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'follow'}
                                 renderIcon={() => <Icon name="person" color="#999"/>}
+                                renderSelectedIcon={() => <Icon name="person" color="#3498d8"/>}
                                 onPress={() => this.setState({ selectedTab: 'follow' })}>
                                 <View><Text>Follow</Text></View>
                             </TabNavigator.Item>
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'setting'}
                                 renderIcon={() => <Icon name="settings" color="#999"/>}
+                                renderSelectedIcon={() => <Icon name="settings" color="#3498d8"/>}
                                 onPress={() => this.setState({ selectedTab: 'setting' })}>
                                 <View><Text>DDD</Text></View>
                             </TabNavigator.Item>
@@ -169,5 +172,9 @@ const styles = StyleSheet.create({
         padding : 10,
         marginTop : 10,
         backgroundColor : '#313131',
+    },
+    innerContent: {
+        height: Dimensions.get('screen').height - 49 * 2,
+        backgroundColor: "#eee"
     }
 });
