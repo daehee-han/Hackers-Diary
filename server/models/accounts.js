@@ -1,18 +1,15 @@
 const mongoose = require('mongoose');
 
-const AccountsSchema = new mongoose.Schema({
-    username : {
+const Database = new mongoose.Schema({
+    email : {
         type: String,
         required: true,
         unique: true
     },
-    fullname : {
+    username : {
         type: String,
-        required: true
-    },
-    phone : {
-        type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -22,22 +19,8 @@ const AccountsSchema = new mongoose.Schema({
     timestamps: true
 });
 
+Database.index({
+    username : 1
+})
 
-AccountsSchema.statics.create = function(username, password, fullname, phone) {
-    return (new this({
-        username : username,
-        password : password,
-        fullname : fullname,
-        phone : phone
-    })).save()
-};
-
-AccountsSchema.statics.select = function(param) {
-    return this.findOne(param);
-}
-
-AccountsSchema.statics.count = function() {
-  return this.find({}).count();
-}
-
-module.exports = mongoose.model('accounts', AccountsSchema);
+module.exports = mongoose.model('accounts', Database);

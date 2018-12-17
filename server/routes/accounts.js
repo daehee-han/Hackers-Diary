@@ -1,4 +1,3 @@
-const returnCode = require('../returnCode');
 const router = require('express').Router();
 const Accounts = require('../models/accounts');
 const ValidCheck = require("../validCheck");
@@ -23,21 +22,29 @@ router.post('/create', (req, res) => {
 
     var username = req.body.username.trim();
     var password = req.body.password.trim();
-    var fullname = req.body.fullname.trim();
-    var phone    = req.body.phone.trim();
+    var email = req.body.email.trim().lower();
 
-    if(!username, !password, !fullname, !phone) {
-        res.send(returnCode['invalid']['value'])
+    if(!username, !password, !email) {
+        res.send({
+            status : false,
+            message : "모든 값을 입력해주세요."
+        })
         return;
     }
 
     if(!ValidCheck("username", username)) {
-        res.send(returnCode['invalid']['username'])
+        res.send({
+            status : false,
+            message : "아이디는 4~20 자로, 영소문자와 숫자, 언더바만 가능합니다."
+        })
         return;
     }
 
-    if(!ValidCheck("phone", phone)) {
-        res.send(returnCode['invalid']['phone'])
+    if(!ValidCheck("email", email)) {
+        res.send({
+            status : false,
+            message : "이메일 주소 형식이 올바르지 않습니다."
+        })
         return;
     }
 
@@ -45,25 +52,37 @@ router.post('/create', (req, res) => {
 
     Accounts.select({username: username})
     .then(account => {
-
         if(account) {
-            res.send(returnCode['accounts']['alreadyUsername'])
+            res.send({
+                status : false,
+                message : "이미 존재하는 Username 입니다."
+            })
             return;
         }
-
-        Accounts.create(username, password, fullname, phone)
-        .then(function() {
-            res.send(returnCode['accounts']['createSuccess']);
+        Accounts.select({email: email})
+        .then(account => {
+            if(account) {
+                res.send({
+                    status : false,
+                    message : "이미 존재하는 Email 입니다."
+                })
+                return;
+            }    
+            Accounts.create({username:username, password:password, email:email})
+            .then(function() {
+                res.send({
+                    status : true,
+                    message : "회원가입 성공"
+                })
+            })
         })
-        .catch(function(err) {
-            console.log(err);
-            res.status(500).send(returnCode['unknown']['error'])
-        })
-
     })
     .catch(function(err) {
         console.log(err);
-        res.status(500).send(returnCode['unknown']['error']);
+        res.status(500).send({
+            status : false,
+            message : "알 수 없는 에러 발생."
+        })
         return;
     })
 });
@@ -72,19 +91,29 @@ router.post('/login', function(req, res) {
     var username = req.body.username.trim()
     var password = req.body.password.trim()
     password = Util.passwordHash(password)
-    Accounts.select({
+    Accounts.findOne({
         username: username,
         password: password
     }).then(function(account) {
         if(account === null) {
-            res.send(returnCode['accounts']['loginFail'])
+            res.send({
+                status : false,
+                message : "존재하지 않는 계정입니다."
+            })
             return;
         }
         req.session.username = username;
-        res.send(returnCode['accounts']['loginSuccess'])
+        res.send({
+            status : true,
+            message : "로그인 성공"
+        })
     }).catch(function(err) {
         console.log(err);
-        res.status(500).send(returnCode['unknown']['error']);
+        res.status(500).send({
+            status : false,
+            message : "알 수 없는 에러 발생."
+        })
+        return;
     })
 });
 
