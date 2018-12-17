@@ -1,10 +1,15 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Button,Text, View, Dimensions, ScrollView, Image } from 'react-native';
+
 import Login from './pages/login';
 import Register from './pages/register';
 import Main from './pages/main';
-import Detail from './pages/detail';
+import Category from './pages/category';
+import Like from './pages/like';
+import Setting from './pages/setting';
+import Follow from './pages/follow';
+
 import { SearchBar, Icon } from 'react-native-elements';
 const SharedPreferences = require('react-native-shared-preferences');
 import TabNavigator from 'react-native-tab-navigator';
@@ -21,11 +26,10 @@ export default class App extends Component {
                 'login' : Login,
                 'register' : Register,
                 'timeline' : Main,
-                'detail': Detail,
-                'like' : Detail,
-                'category' : Detail,
-                'follow' : Detail,
-                'setting' : Detail
+                'category' : Category,
+                'like' : Like,
+                'follow' : Follow,
+                'setting' : Setting
             },
             screen: Login,
             hide: true,
@@ -55,6 +59,7 @@ export default class App extends Component {
                 </View>
             );
         } else {
+            CurrentScreen = this.state.screens[this.state.selectedTab]
             return (
                 <View style={styles.view}>
                     <View style={styles.topMenu}>
@@ -132,7 +137,7 @@ export default class App extends Component {
                     </View>
                     <View>
                         <View style={styles.innerContent}>
-                            <this.state.screen change={this.changeScreen} />
+                            <CurrentScreen change={this.changeScreen} />
                         </View>
                     </View>
                 </View>

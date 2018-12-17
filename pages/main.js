@@ -57,7 +57,6 @@ export default class App extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <ScrollView>
-                    <Text style={styles.h1}># Recent Feeds</Text>
                     <View style={styles.body}>
                         {feeds}
                     </View>
@@ -68,9 +67,6 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-    h1 : {
-        fontSize : 15,
-    },
     card : {
         padding : 10,
         backgroundColor : '#fff',
@@ -78,8 +74,6 @@ const styles = StyleSheet.create({
     },
     title : {
         fontSize : 17
-    },
-    url : {
     },
     cardIntro : {
         flexDirection : 'row',

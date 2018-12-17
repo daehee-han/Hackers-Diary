@@ -4,7 +4,7 @@ import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 export default class App extends Component {
   render() {
     return (
-      <Text>Detail Page</Text>
+      <Text>Follow Page</Text>
     );
   }
 }
