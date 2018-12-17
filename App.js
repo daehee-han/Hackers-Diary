@@ -150,12 +150,12 @@ export default class App extends Component {
                                 renderSelectedIcon={() => <Icon name="table-large" type="material-community" color="#3498d8"/>}
                                 onPress={() => this.setState({ selectedTab: 'category' })}
                             ><View/></TabNavigator.Item>
-                            <TabNavigator.Item
+                            {/* <TabNavigator.Item
                                 selected={this.state.selectedTab === 'follow'}
                                 renderIcon={() => <Icon name="person" color="#999"/>}
                                 renderSelectedIcon={() => <Icon name="person" color="#3498d8"/>}
                                 onPress={() => this.setState({ selectedTab: 'follow' })}
-                            ><View/></TabNavigator.Item>
+                            ><View/></TabNavigator.Item> */}
                             <TabNavigator.Item
                                 selected={this.state.selectedTab === 'setting'}
                                 renderIcon={() => <Icon name="settings" color="#999"/>}

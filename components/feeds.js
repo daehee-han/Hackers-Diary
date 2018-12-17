@@ -6,7 +6,11 @@ const entities = new Entities();
 
 export default class App extends Component {
     constructor(props) {
+        // props.isFlex = (props.isFlex === undefined) ? true : props.isFlex;
         super(props);
+        this.defaultProps = {
+            isFlex : true
+        }
         this.state = {
             feeds : []
         }
@@ -34,7 +38,7 @@ export default class App extends Component {
         }); // parseString End
     }
     render() {
-        feeds = [];
+        const feeds = [];
 
         this.state.feeds.forEach(feed => {
             feeds.push((
@@ -57,12 +61,24 @@ export default class App extends Component {
         });
 
         return (
-            <View style={{ flex: 1 }}>
-                <ScrollView>
-                    <View style={styles.body}>
-                        {feeds}
-                    </View>
-                </ScrollView>
+            <View>
+                {
+                    (this.props.isFlex === false) ? (
+                        <View>
+                            {feeds}
+                            <View style={{ height: 5 }}></View>
+                        </View>
+                   ) : (
+                        <View>
+                            <ScrollView>
+                                <View>
+                                    {feeds}
+                                </View>
+                                <View style={{ height: 5 }}></View>
+                            </ScrollView>
+                        </View>
+                    )
+                }
             </View>
         );
     }
