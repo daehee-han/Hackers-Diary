@@ -32,7 +32,8 @@ export default class App extends Component {
                 'like' : Like,
                 'follow' : Follow,
                 'setting' : Setting,
-                'detail' : Detail
+                'detail' : Detail,
+                'categorySetting' : CategorySetting,
             },
             screen: Login,
             hide: true,
@@ -48,7 +49,7 @@ export default class App extends Component {
         if(key === "login" || key === "register") {
             hide = true;
         }
-        if(key === "detail" || key === "category") {
+        if(key === "detail" || key === "categorySetting") {
             isModal = true;
             this.setState({
                 modal: this.state.screens[key]
@@ -65,7 +66,7 @@ export default class App extends Component {
     }
 
     openModal = () => {
-        this.changeScreen("category", {title:"카테고리 설정"})
+        this.changeScreen("categorySetting", {title:"카테고리 설정"})
         this.setState({
             isModal: true,
         })
@@ -170,7 +171,7 @@ export default class App extends Component {
                     </View>
                     {
                         this.state.isModal ? (
-                            <View style={[styles.modal, {height:Dimensions.get('screen').height-64.7}]}>
+                            <View style={[styles.modal, {height:Dimensions.get('screen').height-53}]}>
                                 <View style={[styles.topMenu,{flexDirection: 'row', justifyContent: 'flex-start'}]}>
                                     <TouchableWithoutFeedback onPress={() => { this.setState({isModal:false}) }}>
                                         <Icon name="arrow-back" color="#fff"/>
