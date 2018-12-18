@@ -25,6 +25,10 @@ const Database = new mongoose.Schema({
         type: String,
         require: true
     },
+    content : {
+        type: String,
+        require: true
+    },    
     contentSnippet : {
         type: String,
         require: true

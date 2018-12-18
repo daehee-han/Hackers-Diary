@@ -23,6 +23,7 @@ router.get('/update', async (req, res) => {
                 feed.items[i].pubDate = (new Date(feed.items[i].pubDate)).getTime();
                 feed.items[i].isoDate = (new Date(feed.items[i].isoDate)).getTime();
                 Feeds.create(feed.items[i]).then(() => {}).catch(()=>{});
+                // console.log(feed.items[i]);
             }
         } catch(error) {
             console.log(error);

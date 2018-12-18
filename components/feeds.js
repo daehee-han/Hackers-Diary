@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
 
 var timeAgo = require('node-time-ago');
-const parseString = require('react-native-xml2js').parseString;
 const Entities = require('html-entities').XmlEntities;
 const entities = new Entities();
  
@@ -26,7 +25,7 @@ export default class App extends Component {
         this.state.feeds.forEach(feed => {
             feeds.push((
                 <TouchableWithoutFeedback
-                    onPress={() => { this.props.change('detail', { id: feed._id, title: '"울지않는 벌새" 블로그' }) }}
+                    onPress={() => { this.props.change('detail', { id: feed._id, title: '"' + feed.author + '" 블로그', feed: feed }) }}
                 >
                     <View style={styles.card}>
                         <Text style={styles.title}>{feed.title}</Text>
@@ -35,7 +34,7 @@ export default class App extends Component {
                             {entities.decode(feed.contentSnippet.slice(0, 150))}
                         </Text>
                         <View style={styles.cardIntro}>
-                            <Text style={[styles.author, styles.introText]}>{feed.author} > {feed.category}</Text>
+                            <Text style={[styles.author, styles.introText]}>{feed.author} > {(typeof feed.categories === "string") ? feed.categories.split(',')[0] : "카테고리 없음"}</Text>
                             <Text style={[styles.pubDate, styles.introText]}>{timeAgo(feed.pubDate)}</Text>
                         </View>
                     </View>

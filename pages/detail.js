@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, View, ScrollView, Dimensions, TouchableNativeFeedback } from 'react-native';
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { Col, Grid } from "react-native-easy-grid";
 import { Icon } from "react-native-elements";
+var timeAgo = require('node-time-ago');
+const Entities = require('html-entities').XmlEntities;
+const entities = new Entities();
 
 export default class App extends Component {
     state = {
@@ -11,14 +14,14 @@ export default class App extends Component {
         return (
             <ScrollView>
                 <View style={styles.view}>
-                    <Text style={{ fontSize: 23, marginTop: 20 }}>글로벌 보안기업들이 선정한 2019년 7대 보안 키워드</Text>
+                    <Text style={{ fontSize: 23, marginTop: 20 }}>{this.props.data.feed.title}</Text>
                     <View>
-                        <Text style={{ fontSize: 13, color: '#888', marginTop: 10 }}>보안뉴스 > 긴급경보</Text>
+                        <Text style={{ fontSize: 13, color: '#888', marginTop: 10 }}>{this.props.data.feed.author} > {(typeof this.props.data.feed.categories === "string") ? this.props.data.feed.categories.split(',')[0] : "카테고리 없음"}</Text>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 13, color: '#888' }}>울지않는 벌새</Text>
+                        <Text style={{ fontSize: 13, color: '#888' }}>{this.props.data.feed.creator} 님의 블로그</Text>
                         <Text style={{ fontSize: 13, color: '#888', marginLeft: 5, marginRight: 5 }}>/</Text>
-                        <Text style={{ fontSize: 13, color: '#888' }}>23시간 전</Text>
+                        <Text style={{ fontSize: 13, color: '#888' }}>{timeAgo(this.props.data.feed.pubDate)}</Text>
                     </View>
                     <View>
                         <Image source={{ uri: 'https://cdn.pixabay.com/photo/2015/06/24/15/45/code-820275_960_720.jpg' }} style={{ width: Dimensions.get('screen').width - 20, height: 200, marginTop: 20, marginBottom: 15 }} />
@@ -38,7 +41,7 @@ export default class App extends Component {
                         </Col>
                     </Grid>
                     <View>
-                        <Text>{this.state.body.replace("\n", "\n")}</Text>
+                        <Text>{entities.decode(this.props.data.feed.contentSnippet)}</Text>
                     </View>
                 </View>
             </ScrollView>
