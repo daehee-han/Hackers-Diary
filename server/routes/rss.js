@@ -42,4 +42,15 @@ router.get('/recent', (req, res) => {
     })
 })
 
+router.get('/like', (req, res) => {
+    console.log(req.cookies.hacker);
+    console.log(req.cookies.hacker);
+    console.log(req.cookies.hacker);
+    console.log(req.cookies.hacker);
+    console.log(req.cookies.hacker);
+    Feeds.find().sort({pubDate:-1}).limit(100).then(rows => {
+        res.send({status:true, data:rows});
+    })
+})
+
 module.exports = router;
