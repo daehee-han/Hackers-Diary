@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
+const axios = require('axios').default
+
+const JEnum = require('../enum')
 
 export default class App extends Component {
     state = {
@@ -9,12 +12,24 @@ export default class App extends Component {
         password : "",
         password2 : ""
     }
-    login = () => {
+    register = () => {
         if(this.state.password !== this.state.password2) {
             alert("비밀번호와 확인용 비밀번호가 서로 같지 않습니다.");
             return;
         }
-
+        axios.post(JEnum.register, {
+            username : this.state.username,
+            email : this.state.email,
+            password: this.state.password
+        }).then(res => {
+            if(!res.data.status) {
+                alert(res.data.message);
+                return;
+            }
+            alert(res.data.message);
+            this.props.change("login")
+        })
+        
     }
     render() {
         return (
@@ -79,7 +94,7 @@ export default class App extends Component {
                         <Button
                             large
                             backgroundColor="#192a56"
-                            onPress={this.login}
+                            onPress={this.register}
                             title='계정 만들기' />
                     </View>
                     <View style={{marginTop:10}}>

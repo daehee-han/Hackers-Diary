@@ -3,39 +3,33 @@ const Accounts = require('../models/accounts');
 const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
-router.get('/', (req, res) => {
-    if(req.session.username) {
+router.get('/', async (req, res) => {
+    const token = (await req.tokenGet(req.token)).isLogin;
+    if(token) {
       res.send({
           isLogin : true,
-          token : token
+          token : req.token
       })
       return;
     }
-    let token = "OAISJDOAJDOISAJDOIJDSAOIASDOIJASOIDj"
     res.send({
         isLogin : false,
-        token : token
+        token : req.token
     })
 })
 
-router.post('/create', (req, res) => {
+router.post('/register', (req, res) => {
+
+    console.log(req.body)
 
     var username = req.body.username.trim();
     var password = req.body.password.trim();
-    var email = req.body.email.trim().lower();
+    var email = req.body.email.trim().toLowerCase();
 
     if(!username, !password, !email) {
         res.send({
             status : false,
             message : "모든 값을 입력해주세요."
-        })
-        return;
-    }
-
-    if(!ValidCheck("username", username)) {
-        res.send({
-            status : false,
-            message : "아이디는 4~20 자로, 영소문자와 숫자, 언더바만 가능합니다."
         })
         return;
     }
@@ -48,9 +42,17 @@ router.post('/create', (req, res) => {
         return;
     }
 
+    if(!ValidCheck("username", username)) {
+        res.send({
+            status : false,
+            message : "아이디는 4~20 자로, 영소문자와 숫자, 언더바만 가능합니다."
+        })
+        return;
+    }
+
     password = Util.passwordHash(password)
 
-    Accounts.select({username: username})
+    Accounts.findOne({username: username})
     .then(account => {
         if(account) {
             res.send({
@@ -59,7 +61,7 @@ router.post('/create', (req, res) => {
             })
             return;
         }
-        Accounts.select({email: email})
+        Accounts.findOne({email: email})
         .then(account => {
             if(account) {
                 res.send({
@@ -94,7 +96,7 @@ router.post('/login', function(req, res) {
     Accounts.findOne({
         username: username,
         password: password
-    }).then(function(account) {
+    }).then(async (account) => {
         if(account === null) {
             res.send({
                 status : false,
@@ -102,10 +104,14 @@ router.post('/login', function(req, res) {
             })
             return;
         }
-        req.session.username = username;
+        await req.tokenSet(req.token, {
+            isLogin: true,
+            username: username,
+        });
         res.send({
-            status : true,
-            message : "로그인 성공"
+            status: true,
+            message: "로그인 성공",
+            token: req.token
         })
     }).catch(function(err) {
         console.log(err);
