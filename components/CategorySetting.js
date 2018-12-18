@@ -11,9 +11,9 @@ export default class App extends Component {
         super(props);
         this.state = {
             isModalVisible : false,
-            selected: "Web hacking - XSS",
             title : "",
-            categories : []
+            categories : [],
+            selected:{}
         }
         this.loadCategory();
     }
@@ -49,11 +49,29 @@ export default class App extends Component {
             });
         })
     }
+    removeCategory = () => {
+        const id = this.state.selected._id;
+        SharedPreferences.getItem("token", (value) => {
+            Axios.get(JEnum.removeCategory + "/" + value + "/" + id)
+            .then(res => {
+                if(!res.data.status) {
+                    alert(res.data.message);
+                    return;
+                }
+                alert("카테고리를 삭제하였습니다.");
+                this.loadCategory();
+                this.setState({
+                    isModalVisible: false
+                })
+                return;
+            });
+        })
+    }
     render() {
         const Categories = []
         for(let i = 0; i < this.state.categories.length; i++) {
             Categories.push((
-                <TouchableOpacity onPress={() => { this.setState({isModalVisible: true}); }}>
+                <TouchableOpacity onPress={() => { this.setState({isModalVisible: true, selected:this.state.categories[i]}); }}>
                     <View style={{ padding: 15, flexDirection: 'row', borderBottomColor: "#eee", borderBottomWidth: 1 }}>
                         <View>
                             <Text style={{ fontSize: 18 }}>{this.state.categories[i].category}</Text>
@@ -87,13 +105,15 @@ export default class App extends Component {
                 </View>
                 <Modal isVisible={this.state.isModalVisible}>
                     <View style={{ width: 300, padding: 15, backgroundColor: "#fff", borderRadius: 10, alignSelf:"center" }}>
-                        <Text style={{ fontSize: 21 }}>{this.state.selected}</Text>
+                        <Text style={{ fontSize: 21 }}>{this.state.selected.category}</Text>
                         <Text style={{ fontSize: 16 }}>정말로 삭제하시겠습니까?</Text>
-                        <View style={[styles.button, {backgroundColor: "#ff5959", borderWidth: 0}]} onPress={() => { this.setState({ isModalVisible: false }) }}>
-                            <Text style={{ alignSelf: "center", color: "#fff" }}>삭제하기</Text>
-                        </View>
+                        <TouchableOpacity onPress={() => { this.removeCategory() }}>
+                            <View style={[styles.button, {backgroundColor: "#ff5959", borderWidth: 0}]}>
+                                <Text style={{ alignSelf: "center", color: "#fff" }}>삭제하기</Text>
+                            </View>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => { this.setState({isModalVisible: false}); }}>
-                            <View style={styles.button} onPress={() => { this.setState({ isModalVisible: false }) }}>
+                            <View style={styles.button}>
                                 <Text style={{ alignSelf: "center" }}>취소하기</Text>
                             </View>
                         </TouchableOpacity>
