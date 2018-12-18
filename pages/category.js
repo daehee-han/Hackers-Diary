@@ -1,22 +1,60 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Picker, ScrollView } from 'react-native';
 import Feeds from '../components/feeds';
+const SharedPreferences = require('react-native-shared-preferences');
 import Axios from 'axios';
+const JEnum = require('../enum')
 
 export default class App extends Component {
 
-    state = {
-        category: "select"
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            category : "select",
+            categories : []
+        }
+    
+        SharedPreferences.getItem("token", (value) => {
+            Axios.get(JEnum.category + "/" + value)
+            .then(res => {
+                if(!res.data.status) {
+                    alert(res.data.message);
+                    return;
+                }
+                this.setState({
+                    categories : res.data.data ? res.data.data : []
+                })
+                return;
+            });
+        })        
+
     }
 
     getFeeds = (callback) => {
-        Axios.get("http://mungsul.tistory.com/rss")
-        .then(res => {
-            callback(res);
-        });
+        SharedPreferences.getItem("token", (value) => {
+            Axios.get(JEnum.category + "/" + value + "/" + this.state.category)
+            .then(res => {
+                if(!res.data.status) {
+                    alert(res.data.message);
+                    return;
+                }
+                callback(res.data.data ? res.data.data : []);
+                return;
+            });
+        })        
     }
 
     render() {
+
+        const Pickers = []
+        for(let i=0;i<this.state.categories.length;i++) {
+            Pickers.push((
+                <Picker.Item label={this.state.categories[i].category} value={this.state.categories[i]._id} />
+            ))
+        }
+
+
         return (
             <View>
                 <ScrollView>
@@ -35,9 +73,7 @@ export default class App extends Component {
                             onValueChange={(value) => { this.setState({ category: value }) }}
                         >
                             <Picker.Item label="카테고리를 선택해주세요." value="select" />
-                            <Picker.Item label="Steve" value="steve" />
-                            <Picker.Item label="Ellen" value="ellen" />
-                            <Picker.Item label="Maria" value="maria" />
+                            {Pickers}
                         </Picker>
                     </View>
                     {

@@ -93,4 +93,34 @@ router.get('/:token', async (req, res) => {
     })
 })
 
+router.get('/:token/:category', async (req, res) => {
+    const data = await req.tokenGet(req.params.token)
+    const category = req.params.category
+    if(!!!data) {
+        res.send({
+            status : false,
+            message: "로그인 세션이 종료된것으로 보입니다. 다시 로그인해주세요."
+        })
+        return;
+    }     
+    const username = data.data.username;
+    const query = {
+        username: username,
+        category: category
+    }
+
+    Category.findOne(query).then((row) => {
+        res.send({
+            status : true,
+            data : row
+        })
+        return;
+    }).catch(e => {
+        console.log(e);
+        res.send({status:false, message:"에러 발생"})            
+        return;
+    })
+})
+
+
 module.exports = router;

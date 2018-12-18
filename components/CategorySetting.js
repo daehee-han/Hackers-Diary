@@ -68,6 +68,7 @@ export default class App extends Component {
         })
     }
     render() {
+        
         const Categories = []
         for(let i = 0; i < this.state.categories.length; i++) {
             Categories.push((
