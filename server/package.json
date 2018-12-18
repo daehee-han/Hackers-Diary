@@ -18,7 +18,9 @@
     "express-session": "^1.15.6",
     "mongoose": "^5.4.0",
     "mongoose-auto-increment": "^5.0.1",
-    "pug": "^2.0.3"
+    "node-fetch": "^2.3.0",
+    "pug": "^2.0.3",
+    "rss-parser": "^3.6.0"
   },
   "devDependencies": {},
   "repository": {
