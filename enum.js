@@ -6,5 +6,6 @@ module.exports = {
     newCategory: "http://192.168.200.160:8080/category/new",
     removeCategory: "http://192.168.200.160:8080/category/remove",
     category: "http://192.168.200.160:8080/category",
+    cateFeed: "http://192.168.200.160:8080/cateFeed",
     
 }

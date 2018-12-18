@@ -51,7 +51,18 @@ export default class App extends Component {
         this.setState({
             category : id
         })
-        alert(id);
+        if(id === "select") return;
+        SharedPreferences.getItem("token", (value) => {
+            Axios.get(JEnum.cateFeed + "/" + value + "/" + id + "/" + this.props.data.feed._id)
+            .then(res => {
+                if(!res.data.status) {
+                    alert(res.data.message);
+                    return;
+                }
+                alert("카테고리 적용이 되었습니다.")
+                return;
+            });
+        })
     }
 
     render() {
