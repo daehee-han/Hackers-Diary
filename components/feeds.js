@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
+
+var timeAgo = require('node-time-ago');
 const parseString = require('react-native-xml2js').parseString;
 const Entities = require('html-entities').XmlEntities;
 const entities = new Entities();
-
+ 
 export default class App extends Component {
     constructor(props) {
-        // props.isFlex = (props.isFlex === undefined) ? true : props.isFlex;
         super(props);
         this.defaultProps = {
             isFlex : true
@@ -17,25 +18,7 @@ export default class App extends Component {
         props.getFeeds(this.getFeeds);
     }
     getFeeds = (res) => {
-        parseString(res.data, (err, result) => {
-            feeds = [];
-            items = result.rss.channel[0].item;
-            items.forEach(item => {
-                feeds.push({
-                    _id: "IDIDIDID",
-                    title: item.title,
-                    link: item.link,
-                    description: item.description[0].replace(/\n/ig," ").replace(/<br\s*\/>/ig, " ").replace(/(<([^>]+)>)/ig,"").replace(/&nbsp;/ig, " ").slice(0, 100) + " ...",
-                    category: item.category,
-                    author: item.author,
-                    guid: item.guid,
-                    pubDate: item.pubDate
-                })
-            });
-            this.setState({
-                feeds : feeds
-            })
-        }); // parseString End
+        this.setState({ feeds: res.data.data });
     }
     render() {
         const feeds = [];
@@ -49,11 +32,11 @@ export default class App extends Component {
                         <Text style={styles.title}>{feed.title}</Text>
                         <Text style={[styles.url, styles.introText]}>{(feed.guid) ? feed.guid : feed.link}</Text>
                         <Text style={{color:"#888",margin:10}}>
-                            {entities.decode(feed.description)}
+                            {entities.decode(feed.contentSnippet.slice(0, 150))}
                         </Text>
                         <View style={styles.cardIntro}>
                             <Text style={[styles.author, styles.introText]}>{feed.author} > {feed.category}</Text>
-                            <Text style={[styles.pubDate, styles.introText]}>{feed.pubDate}</Text>
+                            <Text style={[styles.pubDate, styles.introText]}>{timeAgo(feed.pubDate)}</Text>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
