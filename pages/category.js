@@ -33,13 +33,9 @@ export default class App extends Component {
 
     getFeeds = (callback) => {
         SharedPreferences.getItem("token", (value) => {
-            Axios.get(JEnum.category + "/" + value + "/" + this.state.category)
+            Axios.get(JEnum.cateFeed + "/" + value + "/" + this.state.category)
             .then(res => {
-                if(!res.data.status) {
-                    alert(res.data.message);
-                    return;
-                }
-                callback(res.data.data ? res.data.data : []);
+                callback(res);
                 return;
             });
         })        
@@ -91,7 +87,7 @@ export default class App extends Component {
                             </View>
                         ) : (
                                 <View>
-                                    <Feeds getFeeds={this.getFeeds} change={this.props.change} data={this.props.data} isFlex={false} />
+                                    <Feeds getFeeds={this.getFeeds} change={this.props.change} data={this.props.data} isFlex={false} test={this.state.category} />
                                 </View>
                             )
                     }
