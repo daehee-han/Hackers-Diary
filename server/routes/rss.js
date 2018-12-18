@@ -43,14 +43,28 @@ router.get('/recent', (req, res) => {
     })
 })
 
-router.get('/like', (req, res) => {
-    console.log(req.cookies.hacker);
-    console.log(req.cookies.hacker);
-    console.log(req.cookies.hacker);
-    console.log(req.cookies.hacker);
-    console.log(req.cookies.hacker);
-    Feeds.find().sort({pubDate:-1}).limit(100).then(rows => {
-        res.send({status:true, data:rows});
+router.get('/like/:token', async (req, res) => {
+    const data = await req.tokenGet(req.params.token)
+    if(!!!data) {
+        res.send({
+            status : false,
+            message: "로그인 세션이 종료된것으로 보입니다. 다시 로그인해주세요."
+        })
+        return;
+    }     
+    const username = data.data.username;
+    const query = {
+        username: username
+    }
+    const output = []
+    const likes = await Likes.find(query).sort({createdAt:-1}).limit(100).exec();
+    for(let i=0;i<likes.length;i++) {
+        console.log(likes[i].feed);
+        output.push(await Feeds.findById(likes[i].feed).exec());
+    }
+    res.send({
+        status : true,
+        data : output
     })
 })
 
