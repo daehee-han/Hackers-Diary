@@ -8,13 +8,14 @@ jtoken.get = async (key) => {
 }
 
 jtoken.set = async (key, value) => {
-    let res = jtoken.get(key);
+    let res = await jtoken.get(key);
     if(!res) {
-        await Sessions.create({key: key, value}).exec()
+        await Sessions.create({key: key, data: value}).exec()
         return true;
     }
-    res = await Sessions.updateOne({key: key}, {$set:value}).exec()
+    res = await Sessions.updateOne({key: key}, {$set:{data:value}}).exec()
     return true;
 }
 
 module.exports = jtoken
+

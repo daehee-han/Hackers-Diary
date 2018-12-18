@@ -2,13 +2,31 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, TextInput, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 const SharedPreferences = require('react-native-shared-preferences');
+const axios = require('axios').default
+
+const JEnum = require('../enum')
 
 export default class App extends Component {
 
+    state = {
+        username : "",
+        password : ""
+    }
+
     login = () => {
-        SharedPreferences.setItem("isLogin", 'true')
-        SharedPreferences.setItem("token", '')
-        this.props.change('timeline')
+        axios.post(JEnum.login, {
+            username : this.state.username,
+            password: this.state.password
+        }).then(res => {
+            if(!res.data.status) {
+                alert(res.data.message);
+                return;
+            }
+            alert(res.data.message);
+            SharedPreferences.setItem("isLogin", 'true')
+            SharedPreferences.setItem("token", res.data.token)
+            this.props.change('timeline')
+        })
     }
 
     render() {
@@ -49,6 +67,7 @@ export default class App extends Component {
                         <TextInput
                             placeholder="Username"
                             style={styles.textInput}
+                            onChangeText={(value) => {this.setState({username: value})}}
                         />
                     </View>
                     <View style={styles.obj}>
@@ -56,6 +75,7 @@ export default class App extends Component {
                         <TextInput
                             placeholder="Password"
                             style={styles.textInput}
+                            onChangeText={(value) => {this.setState({password: value})}}
                             secureTextEntry
                         />
                     </View>

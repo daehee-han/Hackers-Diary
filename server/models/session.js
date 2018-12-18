@@ -7,8 +7,7 @@ const Database = new mongoose.Schema({
         unique: true
     },
     data : {
-        type: Object,
-        required: true,
+        type: mongoose.Schema.Types.Mixed
     },
 }, {
     timestamps: true
