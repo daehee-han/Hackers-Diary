@@ -10,7 +10,7 @@ export default class App extends Component {
         super(props);
     }
     getFeeds = (callback) => {
-        SharedPreferences.getItem("username", (value) => {
+        SharedPreferences.getItem("token", (value) => {
             Axios.get(JEnum.likeRSS, {
                 headers: {
                     Cookie: "hacker=" + value + ";"

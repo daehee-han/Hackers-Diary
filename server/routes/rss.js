@@ -2,6 +2,7 @@ const Axios = require('axios').default;
 const fs = require('fs');
 const router = require('express').Router();
 const Feeds = require('../models/feeds');
+const Likes = require('../models/like');
 
 let Parser = require('rss-parser');
 let parser = new Parser();
@@ -50,6 +51,55 @@ router.get('/like', (req, res) => {
     console.log(req.cookies.hacker);
     Feeds.find().sort({pubDate:-1}).limit(100).then(rows => {
         res.send({status:true, data:rows});
+    })
+})
+
+router.get('/like/:token/:id', async (req, res) => {
+    const data = await req.tokenGet(req.params.token)
+    if(!!!data) {
+        res.send({
+            status : false,
+            message: "로그인 세션이 종료된것으로 보입니다. 다시 로그인해주세요."
+        })
+        return;
+    }     
+    const username = data.data.username;
+    const query = {
+        username: username,
+        feed: req.params.id
+    }
+    Likes.findOne(query).then(row => {
+        if(!row) {
+            Likes.create(query).then(() => {
+                res.send({
+                    status:true,
+                    message: "",
+                    data: true
+                })
+                return;
+            }).catch(e => {
+                console.log(e);
+                res.send({status:false, message:"에러 발생"})            
+                return;
+            })
+            return;
+        } 
+        Likes.deleteOne(query).then(() => {
+            res.send({
+                status:true,
+                message: "",
+                data: false
+            })
+            return;
+        }).catch(e => {
+            console.log(e);
+            res.send({status:false, message:"에러 발생"})            
+            return;
+        })
+    }).catch(e => {
+        console.log(e);
+        res.send({status:false, message:"에러 발생"})            
+        return;
     })
 })
 
