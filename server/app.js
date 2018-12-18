@@ -55,5 +55,6 @@ mongoose.connect("mongodb://localhost/HackersDiary", {useNewUrlParser: true})
 
 app.use('/accounts', require('./routes/accounts'));
 app.use('/rss', require('./routes/rss'));
+app.use('/category', require('./routes/category'));
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
